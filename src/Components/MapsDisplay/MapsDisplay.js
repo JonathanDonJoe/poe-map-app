@@ -7,17 +7,23 @@ class MapsDisplay extends Component {
     state = {
 
     }
-    render() { 
-        console.log(mapData.dictionary.maps);
-        console.log(mapData.dictionary);
-        let mapArray = []
-        let mapDataKeys = Object.keys(mapData.dictionary.maps);
-        console.log(mapDataKeys)
-        mapDataKeys.forEach( key => {
-            mapArray.push(mapData.dictionary.maps[key])
-        })
-        console.log(mapArray)
-        let mapItem = mapArray.map( (item, key) => <p key={key}>{item}</p>)
+    render() {
+        console.log(mapData)
+
+        // let mapArray = []
+        let mapDataKeys = Object.keys(mapData);
+        // console.log(mapDataKeys)
+        // mapDataKeys.forEach( key => {
+        //     mapArray.push(mapData.dictionary.maps[key])
+        // })
+        // console.log(mapArray)
+        let mapItem = mapDataKeys.map( (k, key) => 
+            <div key={key}>
+                <p>{mapData[k].name}</p>
+                <p>{mapData[k].region}</p>
+                <p>{mapData[k].tiers.join(',')}</p>
+            </div>
+        )
         return (
             <div className='container'>
                 <h1>Maps</h1>
@@ -26,5 +32,5 @@ class MapsDisplay extends Component {
         );
     }
 }
- 
+
 export default MapsDisplay;
