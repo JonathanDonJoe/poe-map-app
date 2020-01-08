@@ -22,6 +22,7 @@ class MapsDisplay extends Component {
         return (
             <div className='container'>
                 <h1>Maps</h1>
+                <SingleMap mapData={{image_url:'', name: 'Name', region:'Region', tiers: ['Tiers']}} />
                 {mapItems}
             </div>
         );
