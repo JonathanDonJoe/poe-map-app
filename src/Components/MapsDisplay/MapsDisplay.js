@@ -17,7 +17,7 @@ class MapsDisplay extends Component {
             //     <p>{mapData[k].region}</p>
             //     <p>{mapData[k].tiers.join(',')}</p>
             // </div>
-            < SingleMap key={key} name={mapData[k].name} region={mapData[k].region} tiers={mapData[k].tiers} />
+            < SingleMap key={key} mapData={mapData[k]} />
         )
         return (
             <div className='container'>
