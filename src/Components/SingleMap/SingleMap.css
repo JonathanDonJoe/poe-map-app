@@ -1,0 +1,13 @@
+.map-card {
+    display: flex;
+    /* justify-content: space-evenly; */
+}
+
+.map-icon {
+    width: 10%;
+}
+
+.text-name, .text-region, .text-tiers {
+    width: 30%;
+    /* width: 200px; */
+}
