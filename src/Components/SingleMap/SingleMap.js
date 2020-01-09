@@ -13,7 +13,9 @@ class SingleMap extends Component {
         let localStorageKey = `mapState-${this.props.k}`
         // console.log(localStorage.getItem(localStorageKey))
         if(localStorage.getItem(localStorageKey)) {
-            this.setState(JSON.parse(localStorage.getItem(localStorageKey)), () => {console.log(this.state)})
+            this.setState(JSON.parse(localStorage.getItem(localStorageKey))
+            // , () => {console.log(this.state)}
+            )
         }
     }
 
@@ -46,13 +48,13 @@ class SingleMap extends Component {
         let checkBoxes = !(this.props.mapData.name === 'Name')
             ? <div className='checkbox-container'>
                 <div className='checkbox-container-container'>
-                    <input type="checkbox" id="completed" name="completed" onChange={this.isCompleted} />
+                    <input type="checkbox" checked={this.state.completed} id="completed" name="completed" onChange={this.isCompleted} />
                 </div>
                 <div className='checkbox-container-container'>
-                    <input type="checkbox" id="awakened" name="awakened" onChange={this.isAwakened} />
+                    <input type="checkbox" checked={this.state.awakened} id="awakened" name="awakened" onChange={this.isAwakened} />
                 </div>
                 <div className='checkbox-container-container'>
-                    <input type="checkbox" id="tempCompleted" name="tempCompleted" onChange={this.isTempCompleted} />
+                    <input type="checkbox" checked={this.state.tempCompleted} id="tempCompleted" name="tempCompleted" onChange={this.isTempCompleted} />
                 </div>
             </div>
             : <div className='checkbox-container'>
