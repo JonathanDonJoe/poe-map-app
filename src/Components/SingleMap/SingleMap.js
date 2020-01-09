@@ -9,20 +9,32 @@ class SingleMap extends Component {
         tempCompleted: false
     }
 
+    componentDidMount() {
+        let localStorageKey = `mapState-${this.props.k}`
+        // console.log(localStorage.getItem(localStorageKey))
+        if(localStorage.getItem(localStorageKey)) {
+            this.setState(JSON.parse(localStorage.getItem(localStorageKey)), () => {console.log(this.state)})
+        }
+    }
+
     isCompleted = (e) => {
         this.setState({
             completed: e.target.checked
-        })
+        }, this.saveToLocal)
     }
     isAwakened = (e) => {
         this.setState({
             awakened: e.target.checked
-        })
+        }, this.saveToLocal)
     }
     isTempCompleted = (e) => {
         this.setState({
             tempCompleted: e.target.checked
-        })
+        }, this.saveToLocal)
+    }
+
+    saveToLocal = () => {
+        localStorage.setItem(`mapState-${this.props.k}`, JSON.stringify(this.state));
     }
 
     render() {
