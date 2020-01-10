@@ -39,6 +39,17 @@ class SingleMap extends Component {
         localStorage.setItem(`mapState-${this.props.k}`, JSON.stringify(this.state));
     }
 
+    colorTier = (tier, i) => {
+        // console.log(tier)
+        if (tier >= 11) {
+            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='red'>{tier}</p></div>
+        } else if (tier >= 6) {
+            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='yellow'>{tier}</p></div>
+        } else {
+            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='white'>{tier}</p></div>
+        }
+    }
+
     render() {
         // console.log(this.state)
         let mapName = this.props.mapData.name.slice(0, this.props.mapData.name.length - 4)
@@ -83,7 +94,7 @@ class SingleMap extends Component {
                     <p>{this.props.mapData.region}</p>
                 </div>
                 <div className='text-tiers'>
-                    <p>{this.props.mapData.tiers.join(', ')}</p>
+                    {this.props.mapData.tiers.map(this.colorTier)}
                 </div>
                 {checkBoxes}
             </div>

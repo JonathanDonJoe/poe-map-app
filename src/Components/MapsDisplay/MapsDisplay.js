@@ -8,9 +8,9 @@ class MapsDisplay extends Component {
     state = {
 
     }
-    render() {
-        console.log(mapData);
-        let mapDataKeys = Object.keys(mapData);
+
+    createMapComponentsArr = (mapDict) => {
+        let mapDataKeys = Object.keys(mapDict);
         let mapItems = mapDataKeys.map( (k, key) => 
             // <div key={key}>
             //     <p>{mapData[k].name}</p>
@@ -19,11 +19,17 @@ class MapsDisplay extends Component {
             // </div>
             < SingleMap key={key} k={key} mapData={mapData[k]} />
         )
+        return mapItems
+    }
+
+    render() {
+        // console.log(mapData);
+        
         return (
             <div className='container'>
                 <h1>Maps</h1>
                 <SingleMap mapData={{image_url:'', name: 'Name', region:'Region', tiers: ['Tiers']}} />
-                {mapItems}
+                {this.createMapComponentsArr(mapData)}
             </div>
         );
     }
