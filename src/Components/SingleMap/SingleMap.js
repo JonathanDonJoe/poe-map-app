@@ -12,9 +12,9 @@ class SingleMap extends Component {
     componentDidMount() {
         let localStorageKey = `mapState-${this.props.k}`
         // console.log(localStorage.getItem(localStorageKey))
-        if(localStorage.getItem(localStorageKey)) {
+        if (localStorage.getItem(localStorageKey)) {
             this.setState(JSON.parse(localStorage.getItem(localStorageKey))
-            // , () => {console.log(this.state)}
+                // , () => {console.log(this.state)}
             )
         }
     }
@@ -41,13 +41,13 @@ class SingleMap extends Component {
 
     colorTier = (tier, i) => {
         // console.log(tier)
+        let color = 'white'
         if (tier >= 11) {
-            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='red'>{tier}</p></div>
+            color = 'red'
         } else if (tier >= 6) {
-            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='yellow'>{tier}</p></div>
-        } else {
-            return <div key={i} className='tier-text-container'>{i>0 && <p>,&nbsp;</p>}<p className='white'>{tier}</p></div>
+            color = 'yellow'
         }
+        return <div key={i} className='tier-text-container'>{i > 0 && <p>,&nbsp;</p>}<p className={color}>{tier}</p></div>
     }
 
     render() {
