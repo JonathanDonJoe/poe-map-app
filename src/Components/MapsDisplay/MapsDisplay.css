@@ -5,3 +5,17 @@
     border-radius: 25px;
     /* opacity: 80%; */
 }
+
+.checkbox-container {
+    width: 100%;
+}
+
+.filter-checkbox-container {
+    display:flex;
+    justify-content: space-evenly;
+}
+.filter-checkbox-container-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
