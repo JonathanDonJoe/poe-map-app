@@ -10,11 +10,11 @@
     width: 100%;
 }
 
-.filter-checkbox-container {
+.filter-region-container {
     display:flex;
     justify-content: space-evenly;
 }
-.filter-checkbox-container-container {
+.filter-region {
     display: flex;
     flex-direction: column;
     align-items: center;

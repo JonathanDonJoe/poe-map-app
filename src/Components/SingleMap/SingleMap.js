@@ -46,11 +46,17 @@ class SingleMap extends Component {
             color = 'red'
         } else if (tier >= 6) {
             color = 'yellow'
+        } else if (tier === 'Tiers') {
+            color = 'black'
         }
         return <div key={i} className='tier-text-container'>{i > 0 && <p>,&nbsp;</p>}<p className={color}>{tier}</p></div>
     }
+    colorImageByTier = () => {
+        return this.props.mapData.image_url.slice(0, this.props.mapData.image_url.length - 2) + this.props.mapData.tiers[0]
+    }
 
     render() {
+        this.colorImageByTier(this.props.mapData)
         // console.log(this.state)
         let mapName = this.props.mapData.name.slice(0, this.props.mapData.name.length - 4)
         // console.log(mapName)
@@ -84,7 +90,7 @@ class SingleMap extends Component {
         return (
             <div className='map-card'>
                 <div className='map-icon'>
-                    <img src={this.props.mapData.image_url} alt={mapName}></img>
+                    <img src={this.colorImageByTier()} alt={mapName}></img>
 
                 </div>
                 <div className='text-name'>

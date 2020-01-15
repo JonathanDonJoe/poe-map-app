@@ -24,12 +24,12 @@ class MapsDisplay extends Component {
     }
     regionsCheckboxes = () => {
         let checkboxes = Object.keys(regions).map((regionKey, k) =>
-            <div className='filter-checkbox-container-container' key={k}>
+            <div className='filter-region' key={k}>
                 {regions[regionKey]}
                 <input type="checkbox" checked={this.state.showRegions[k]} id={`region-${k}`} name={regions[regionKey]} onChange={this.toggleFilter} />
             </div>
         )
-        return <div className='filter-checkbox-container'>
+        return <div className='filter-region-container'>
             {checkboxes}
         </div>
     }
@@ -40,22 +40,22 @@ class MapsDisplay extends Component {
         console.log(e.target.id.slice(7));
         let filterId = e.target.id.slice(7);
         let newFilter = [...this.state.showRegions];
-        newFilter[filterId]= newFilter[filterId] ? false : true;
+        newFilter[filterId] = newFilter[filterId] ? false : true;
         console.log(newFilter);
         this.setState({
             showRegions: newFilter
         }, () => {
-            console.log(this.state.showRegions.map( (item, k) => {
+            console.log(this.state.showRegions.map((item, k) => {
                 return item ? regions[k] : null
-            }).filter(item=> item)
+            }).filter(item => item)
             )
         })
     }
 
     filteredRegions = () => {
-        return this.state.showRegions.map( (item, k) => {
+        return this.state.showRegions.map((item, k) => {
             return item ? regions[k] : null
-        }).filter(item=> item)
+        }).filter(item => item)
     }
 
     filterMaps = (mapKey) => {
@@ -72,7 +72,9 @@ class MapsDisplay extends Component {
         return (
             <div className='container'>
                 <h1>Maps</h1>
-                {this.regionsCheckboxes()}
+                <div className='filter-container'>
+                    {this.regionsCheckboxes()}
+                </div>
                 <SingleMap mapData={{ image_url: '', name: 'Name', region: 'Region', tiers: ['Tiers'] }} />
                 {this.createMapComponentsArr()}
             </div>
