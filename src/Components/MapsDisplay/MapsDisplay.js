@@ -9,6 +9,14 @@ class MapsDisplay extends Component {
         showRegions: [true, true, true, true, true, true, true, true]
     }
 
+    componentDidMount() {
+        let localStorageKey = `atlasState`
+        if (localStorage.getItem(localStorageKey)) {
+            this.setState(JSON.parse(localStorage.getItem(localStorageKey))
+            )
+        }
+    }
+
     createMapComponentsArr = () => {
         let mapDataKeys = Object.keys(mapData);
         let mapItems = mapDataKeys.filter(this.filterMaps).map((k, key) =>
@@ -35,13 +43,13 @@ class MapsDisplay extends Component {
     }
     toggleFilter = (e) => {
         // console.log(e.target.name)
-        console.log(e.target.checked);
-        console.log(e.target.id);
-        console.log(e.target.id.slice(7));
+        // console.log(e.target.checked);
+        // console.log(e.target.id);
+        // console.log(e.target.id.slice(7));
         let filterId = e.target.id.slice(7);
         let newFilter = [...this.state.showRegions];
         newFilter[filterId] = newFilter[filterId] ? false : true;
-        console.log(newFilter);
+        // console.log(newFilter);
         this.setState({
             showRegions: newFilter
         }, () => {
@@ -49,6 +57,7 @@ class MapsDisplay extends Component {
                 return item ? regions[k] : null
             }).filter(item => item)
             )
+            this.saveToLocal();
         })
     }
 
@@ -65,7 +74,9 @@ class MapsDisplay extends Component {
         return isFiltered
         // return mapData[mapKey].region === this.state.showRegions
     }
-
+    saveToLocal = () => {
+        localStorage.setItem(`atlasState`, JSON.stringify(this.state));
+    }
     render() {
         // console.log(mapData);
 
