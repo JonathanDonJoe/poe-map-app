@@ -6,7 +6,8 @@ import SingleMap from '../SingleMap/SingleMap';
 
 class MapsDisplay extends Component {
     state = {
-        showRegions: [true, true, true, true, true, true, true, true]
+        showRegions: [true, true, true, true, true, true, true, true],
+        showCompletion: [true, true, true]
     }
 
     componentDidMount() {
@@ -25,7 +26,7 @@ class MapsDisplay extends Component {
             //     <p>{mapData[k].region}</p>
             //     <p>{mapData[k].tiers.join(',')}</p>
             // </div>
-            < SingleMap key={key} k={key} mapData={mapData[k]} />
+            < SingleMap key={key} k={key} mapData={mapData[k]} completionFilter={this.state.showCompletion} />
         )
         // let mapArr =  mapDataKeys.map( key => mapData[k] )
         return mapItems
@@ -41,6 +42,41 @@ class MapsDisplay extends Component {
             {checkboxes}
         </div>
     }
+    completionCheckboxes = () => {
+        return <div className='filter-completion-container'>
+            <div className='filter-completion'>
+                Completed
+                <input type="checkbox" checked={this.state.showCompletion[0]} id='completed-0' name='completed' onChange={this.toggleCompletionFilter} />
+            </div>
+            <div className='filter-completion'>
+                Awakened
+                <input type="checkbox" checked={this.state.showCompletion[1]} id='completed-1' name='awakened' onChange={this.toggleCompletionFilter} />
+            </div>
+            <div className='filter-completion'>
+                Temp
+                <input type="checkbox" checked={this.state.showCompletion[2]} id='completed-2' name='tempCompleted' onChange={this.toggleCompletionFilter} />
+            </div>
+        </div>
+    }
+
+    toggleCompletionFilter = (e) => {
+        // console.log(e.target.name)
+        // console.log(e.target.checked);
+        // console.log(e.target.id);
+        console.log(e.target.id.slice(10));
+        let filterId = e.target.id.slice(10);
+        let newFilter = [...this.state.showCompletion];
+        newFilter[filterId] = newFilter[filterId] ? false : true;
+        // console.log(newFilter);
+        this.setState({
+        showCompletion: newFilter
+        }
+        , () => {
+            console.log(this.state.showCompletion)
+            this.saveToLocal();
+        })
+    }
+
     toggleFilter = (e) => {
         // console.log(e.target.name)
         // console.log(e.target.checked);
@@ -84,6 +120,7 @@ class MapsDisplay extends Component {
             <div className='container'>
                 <h1>Maps</h1>
                 <div className='filter-container'>
+                    {this.completionCheckboxes()}
                     {this.regionsCheckboxes()}
                 </div>
                 <SingleMap mapData={{ image_url: '', name: 'Name', region: 'Region', tiers: ['Tiers'] }} />
