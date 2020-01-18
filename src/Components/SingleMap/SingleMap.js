@@ -56,39 +56,40 @@ class SingleMap extends Component {
     }
 
     render() {
-        this.colorImageByTier(this.props.mapData)
-        // console.log(this.state)
-        let mapName = this.props.mapData.name.slice(0, this.props.mapData.name.length - 4)
-        // console.log(mapName)
-        // const url = `http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/${mapName.split(' ').join('')}.png?scale=1&w=1&h=1&mn=6&mt=11`
+        let conditionalDisplay = ''
+        if (this.props.filterByCompletion) {
+            this.colorImageByTier(this.props.mapData)
+            // console.log(this.state)
+            let mapName = this.props.mapData.name.slice(0, this.props.mapData.name.length - 4)
+            // console.log(mapName)
+            // const url = `http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/${mapName.split(' ').join('')}.png?scale=1&w=1&h=1&mn=6&mt=11`
 
-        let checkBoxes = !(this.props.mapData.name === 'Name')
-            ? <div className='checkbox-container'>
-                <div className='checkbox-container-container'>
-                    <input type="checkbox" checked={this.state.completed} id="completed" name="completed" onChange={this.isCompleted} />
+            let checkBoxes = !(this.props.mapData.name === 'Name')
+                ? <div className='checkbox-container'>
+                    <div className='checkbox-container-container'>
+                        <input type="checkbox" checked={this.state.completed} id="completed" name="completed" onChange={this.isCompleted} />
+                    </div>
+                    <div className='checkbox-container-container'>
+                        <input type="checkbox" checked={this.state.awakened} id="awakened" name="awakened" onChange={this.isAwakened} />
+                    </div>
+                    <div className='checkbox-container-container'>
+                        <input type="checkbox" checked={this.state.tempCompleted} id="tempCompleted" name="tempCompleted" onChange={this.isTempCompleted} />
+                    </div>
                 </div>
-                <div className='checkbox-container-container'>
-                    <input type="checkbox" checked={this.state.awakened} id="awakened" name="awakened" onChange={this.isAwakened} />
-                </div>
-                <div className='checkbox-container-container'>
-                    <input type="checkbox" checked={this.state.tempCompleted} id="tempCompleted" name="tempCompleted" onChange={this.isTempCompleted} />
-                </div>
-            </div>
-            : <div className='checkbox-container'>
-                <div className='label-container'>
-                    <p>Completed</p>
-                </div>
-                <div className='label-container'>
-                    <p>Awakened</p>
-                </div>
-                <div className='label-container'>
-                    <p>Temp</p>
+                : <div className='checkbox-container'>
+                    <div className='label-container'>
+                        <p>Completed</p>
+                    </div>
+                    <div className='label-container'>
+                        <p>Awakened</p>
+                    </div>
+                    <div className='label-container'>
+                        <p>Temp</p>
+                    </div>
+
                 </div>
 
-            </div>
-
-        return (
-            <div className='map-card'>
+            let mapRow = <div className='map-card'>
                 <div className='map-icon'>
                     <img src={this.colorImageByTier()} alt={mapName}></img>
 
@@ -104,6 +105,16 @@ class SingleMap extends Component {
                 </div>
                 {checkBoxes}
             </div>
+
+            // console.log(this.props.filterByCompletion)
+
+            if ((!this.props.filterByCompletion[0] || this.state.completed) &&
+            (!this.props.filterByCompletion[1] || this.state.awakened) &&
+            (!this.props.filterByCompletion[2] || this.state.tempCompleted))
+            conditionalDisplay = mapRow
+        }
+        return (
+            conditionalDisplay
         );
     }
 }
