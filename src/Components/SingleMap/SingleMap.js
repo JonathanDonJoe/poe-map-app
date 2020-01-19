@@ -19,6 +19,14 @@ class SingleMap extends Component {
         }
     }
 
+    resetAll = () => {
+        this.setState({
+            completed: false,
+            awakened: false,
+            tempCompleted: false
+        }, ()=> console.log(`reset map id: ${this.props.k}`))
+    }
+
     isCompleted = (e) => {
         this.setState({
             completed: e.target.checked
