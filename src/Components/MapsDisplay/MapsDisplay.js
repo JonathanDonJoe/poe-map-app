@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './MapsDisplay.css';
 import { mapData, regions } from '../../mapData.json';
 import SingleMap from '../SingleMap/SingleMap';
+import CompletionCheckboxes from '../CompletionCheckboxes/CompletionCheckboxes';
 
 class MapsDisplay extends Component {
     state = {
@@ -42,28 +43,12 @@ class MapsDisplay extends Component {
             {checkboxes}
         </div>
     }
-    completionCheckboxes = () => {
-        return <div className='filter-completion-container'>
-            <div className='filter-completion'>
-                Completed
-                <input type="checkbox" checked={this.state.filterByCompletion[0]} id='completed-0' name='completed' onChange={this.toggleCompletionFilter} />
-            </div>
-            <div className='filter-completion'>
-                Awakened
-                <input type="checkbox" checked={this.state.filterByCompletion[1]} id='completed-1' name='awakened' onChange={this.toggleCompletionFilter} />
-            </div>
-            <div className='filter-completion'>
-                Temp
-                <input type="checkbox" checked={this.state.filterByCompletion[2]} id='completed-2' name='tempCompleted' onChange={this.toggleCompletionFilter} />
-            </div>
-        </div>
-    }
 
     toggleCompletionFilter = (e) => {
         // console.log(e.target.name)
         // console.log(e.target.checked);
         // console.log(e.target.id);
-        console.log(e.target.id.slice(10));
+        // console.log(e.target.id.slice(10));
         let filterId = e.target.id.slice(10);
         let newFilter = [...this.state.filterByCompletion];
         newFilter[filterId] = newFilter[filterId] ? false : true;
@@ -72,7 +57,7 @@ class MapsDisplay extends Component {
         filterByCompletion: newFilter
         }
         , () => {
-            console.log(this.state.filterByCompletion)
+            // console.log(this.state.filterByCompletion)
             this.saveToLocal();
         })
     }
@@ -89,10 +74,10 @@ class MapsDisplay extends Component {
         this.setState({
             showRegions: newFilter
         }, () => {
-            console.log(this.state.showRegions.map((item, k) => {
-                return item ? regions[k] : null
-            }).filter(item => item)
-            )
+            // console.log(this.state.showRegions.map((item, k) => {
+            //     return item ? regions[k] : null
+            // }).filter(item => item)
+            // )
             this.saveToLocal();
         })
     }
@@ -120,7 +105,7 @@ class MapsDisplay extends Component {
             <div className='container'>
                 <h1>Maps</h1>
                 <div className='filter-container'>
-                    {this.completionCheckboxes()}
+                    < CompletionCheckboxes toggleCompletionFilter={this.toggleCompletionFilter} filterByCompletion={this.state.filterByCompletion} /> 
                     {this.regionsCheckboxes()}
                 </div>
                 <SingleMap mapData={{ image_url: '', name: 'Name', region: 'Region', tiers: ['Tiers'] }} filterByCompletion={{filterByCompletion: [false, false, false]}} />
