@@ -64,6 +64,7 @@ class SingleMap extends Component {
     }
 
     render() {
+        // console.log(this.props)
         let conditionalDisplay = ''
         if (this.props.filterByCompletion) {
             this.colorImageByTier(this.props.mapData)

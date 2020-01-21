@@ -8,7 +8,8 @@ import CompletionCheckboxes from '../CompletionCheckboxes/CompletionCheckboxes';
 class MapsDisplay extends Component {
     state = {
         showRegions: [true, true, true, true, true, true, true, true],
-        filterByCompletion: [false, false, false]
+        filterByCompletion: [false, false, false],
+        mapCompletion: {}
     }
 
     componentDidMount() {
@@ -17,6 +18,22 @@ class MapsDisplay extends Component {
             this.setState(JSON.parse(localStorage.getItem(localStorageKey))
             )
         }
+        this.setState({
+            mapCompletion: this.createMapCompletionInitialState()
+        })
+    }
+
+    createMapCompletionInitialState = () => {
+        const completionObj = {}
+        Object.keys(mapData).forEach(k => {
+            completionObj[k] = {
+                completed: false,
+                awakened: false,
+                tempCompleted: false
+            }
+        })
+        // console.log(completionObj)
+        return completionObj
     }
 
     createMapComponentsArr = () => {
@@ -54,12 +71,12 @@ class MapsDisplay extends Component {
         newFilter[filterId] = newFilter[filterId] ? false : true;
         // console.log(newFilter);
         this.setState({
-        filterByCompletion: newFilter
+            filterByCompletion: newFilter
         }
-        , () => {
-            // console.log(this.state.filterByCompletion)
-            this.saveToLocal();
-        })
+            , () => {
+                // console.log(this.state.filterByCompletion)
+                this.saveToLocal();
+            })
     }
 
     toggleFilter = (e) => {
@@ -100,15 +117,16 @@ class MapsDisplay extends Component {
     }
     render() {
         // console.log(mapData);
+        console.log(this.state)
 
         return (
             <div className='container'>
                 <h1>Maps</h1>
                 <div className='filter-container'>
-                    < CompletionCheckboxes toggleCompletionFilter={this.toggleCompletionFilter} filterByCompletion={this.state.filterByCompletion} /> 
+                    < CompletionCheckboxes toggleCompletionFilter={this.toggleCompletionFilter} filterByCompletion={this.state.filterByCompletion} />
                     {this.regionsCheckboxes()}
                 </div>
-                <SingleMap mapData={{ image_url: '', name: 'Name', region: 'Region', tiers: ['Tiers'] }} filterByCompletion={{filterByCompletion: [false, false, false]}} />
+                <SingleMap mapData={{ image_url: '', name: 'Name', region: 'Region', tiers: ['Tiers'] }} filterByCompletion={{ filterByCompletion: [false, false, false] }} />
                 {this.createMapComponentsArr()}
             </div>
         );
