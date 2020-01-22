@@ -19,11 +19,11 @@ class MapsDisplay extends Component {
             )
         }
         this.setState({
-            mapCompletion: this.createMapCompletionInitialState()
+            mapCompletion: this.resetMapCompletion()
         })
     }
 
-    createMapCompletionInitialState = () => {
+    resetMapCompletion = () => {
         const completionObj = {}
         Object.keys(mapData).forEach(k => {
             completionObj[k] = {
@@ -36,6 +36,15 @@ class MapsDisplay extends Component {
         return completionObj
     }
 
+    changeMapCompletion = (mapId, completionKey) => {
+        
+        this.setState(prevState => {
+            let newState = Object.assign({}, prevState.mapCompletion)
+            newState[mapId][completionKey] =  newState[mapId][completionKey] ? false : true
+            return {newState}
+        })
+    }
+
     createMapComponentsArr = () => {
         let mapDataKeys = Object.keys(mapData);
         let mapItems = mapDataKeys.filter(this.filterMaps).map((k, key) =>
@@ -44,7 +53,7 @@ class MapsDisplay extends Component {
             //     <p>{mapData[k].region}</p>
             //     <p>{mapData[k].tiers.join(',')}</p>
             // </div>
-            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} />
+            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} changeMapCompletion={this.changeMapCompletion} />
         )
         // let mapArr =  mapDataKeys.map( key => mapData[k] )
         return mapItems

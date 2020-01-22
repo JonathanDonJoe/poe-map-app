@@ -11,10 +11,8 @@ class SingleMap extends Component {
 
     componentDidMount() {
         let localStorageKey = `mapState-${this.props.k}`
-        // console.log(localStorage.getItem(localStorageKey))
         if (localStorage.getItem(localStorageKey)) {
             this.setState(JSON.parse(localStorage.getItem(localStorageKey))
-                // , () => {console.log(this.state)}
             )
         }
     }
@@ -68,10 +66,7 @@ class SingleMap extends Component {
         let conditionalDisplay = ''
         if (this.props.filterByCompletion) {
             this.colorImageByTier(this.props.mapData)
-            // console.log(this.state)
             let mapName = this.props.mapData.name.slice(0, this.props.mapData.name.length - 4)
-            // console.log(mapName)
-            // const url = `http://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/${mapName.split(' ').join('')}.png?scale=1&w=1&h=1&mn=6&mt=11`
 
             let checkBoxes = !(this.props.mapData.name === 'Name')
                 ? <div className='checkbox-container'>
