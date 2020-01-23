@@ -53,7 +53,7 @@ class MapsDisplay extends Component {
             //     <p>{mapData[k].region}</p>
             //     <p>{mapData[k].tiers.join(',')}</p>
             // </div>
-            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} changeMapCompletion={this.changeMapCompletion} />
+            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} changeMapCompletion={this.changeMapCompletion} mapCompletion={this.state.mapCompletion}/>
         )
         // let mapArr =  mapDataKeys.map( key => mapData[k] )
         return mapItems
