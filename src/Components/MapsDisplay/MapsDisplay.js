@@ -13,14 +13,14 @@ class MapsDisplay extends Component {
     }
 
     componentDidMount() {
-        let localStorageKey = `atlasState`
-        if (localStorage.getItem(localStorageKey)) {
-            this.setState(JSON.parse(localStorage.getItem(localStorageKey))
+        if (localStorage.getItem(`atlasState`)) {
+            this.setState(JSON.parse(localStorage.getItem(`atlasState`))
             )
+        } else {
+            this.setState({
+                mapCompletion: this.resetMapCompletion()
+            })
         }
-        this.setState({
-            mapCompletion: this.resetMapCompletion()
-        })
     }
 
     resetMapCompletion = () => {
@@ -37,12 +37,11 @@ class MapsDisplay extends Component {
     }
 
     changeMapCompletion = (mapId, completionKey) => {
-        
-        this.setState(prevState => {
-            let newState = Object.assign({}, prevState.mapCompletion)
-            newState[mapId][completionKey] =  newState[mapId][completionKey] ? false : true
-            return {newState}
-        })
+        let newState = Object.assign({}, this.state.mapCompletion)
+        newState[mapId][completionKey] = newState[mapId][completionKey] ? false : true
+        this.setState({
+            mapCompletion: newState
+        }, this.saveToLocal())
     }
 
     createMapComponentsArr = () => {
@@ -53,7 +52,7 @@ class MapsDisplay extends Component {
             //     <p>{mapData[k].region}</p>
             //     <p>{mapData[k].tiers.join(',')}</p>
             // </div>
-            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} changeMapCompletion={this.changeMapCompletion} mapCompletion={this.state.mapCompletion}/>
+            < SingleMap key={key} k={key} mapData={mapData[k]} filterByCompletion={this.state.filterByCompletion} changeMapCompletion={this.changeMapCompletion} mapCompletion={this.state.mapCompletion} />
         )
         // let mapArr =  mapDataKeys.map( key => mapData[k] )
         return mapItems

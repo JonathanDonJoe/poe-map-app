@@ -3,36 +3,24 @@ import React, { Component } from 'react';
 import './SingleMap.css'
 
 class SingleMap extends Component {
-    // state = {
-    //     completed: false,
-    //     awakened: false,
-    //     tempCompleted: false
-    // }
 
-    // componentDidMount() {
-    // let localStorageKey = `mapState-${this.props.k}`
-    // if (localStorage.getItem(localStorageKey)) {
-    //     this.setState(JSON.parse(localStorage.getItem(localStorageKey))
-    //     )
-    // }
-    // }
-
-    isCompleted = (e) => {
+    flipCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'completed')
-        console.log(this.props.mapCompletion)
+        // console.log(this.props.mapCompletion)
+        // this.props.saveToLocal()
     }
-    isAwakened = (e) => {
+    
+    flipAwakened = (e) => {
         this.props.changeMapCompletion(this.props.k, 'awakened')
-        console.log(this.props.mapCompletion)
+        // console.log(this.props.mapCompletion)
+        // this.props.saveToLocal()
     }
-    isTempCompleted = (e) => {
+    
+    flipTempCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'tempCompleted')
-        console.log(this.props.mapCompletion)
+        // console.log(this.props.mapCompletion)
+        // this.props.saveToLocal()
     }
-
-    // saveToLocal = () => {
-    //     localStorage.setItem(`mapState-${this.props.k}`, JSON.stringify(this.state));
-    // }
 
     colorTier = (tier, i) => {
         // console.log(tier)
@@ -46,6 +34,7 @@ class SingleMap extends Component {
         }
         return <div key={i} className='tier-text-container'>{i > 0 && <p>,&nbsp;</p>}<p className={color}>{tier}</p></div>
     }
+
     colorImageByTier = () => {
         return this.props.mapData.image_url.slice(0, this.props.mapData.image_url.length - 2) + this.props.mapData.tiers[0]
     }
@@ -77,13 +66,13 @@ class SingleMap extends Component {
                         ?
                         <div className='checkbox-container'>
                             <div className='checkbox-container-container'>
-                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].completed} id="completed" name="completed" onChange={this.isCompleted} />
+                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].completed} id="completed" name="completed" onChange={this.flipCompleted} />
                             </div>
                             <div className='checkbox-container-container'>
-                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].awakened} id="awakened" name="awakened" onChange={this.isAwakened} />
+                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].awakened} id="awakened" name="awakened" onChange={this.flipAwakened} />
                             </div>
                             <div className='checkbox-container-container'>
-                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].tempCompleted} id="tempCompleted" name="tempCompleted" onChange={this.isTempCompleted} />
+                                <input type="checkbox" checked={this.props.mapCompletion[this.props.k].tempCompleted} id="tempCompleted" name="tempCompleted" onChange={this.flipTempCompleted} />
                             </div>
                         </div>
                         :
