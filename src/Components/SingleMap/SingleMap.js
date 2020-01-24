@@ -6,24 +6,17 @@ class SingleMap extends Component {
 
     flipCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'completed')
-        // console.log(this.props.mapCompletion)
-        // this.props.saveToLocal()
     }
     
     flipAwakened = (e) => {
         this.props.changeMapCompletion(this.props.k, 'awakened')
-        // console.log(this.props.mapCompletion)
-        // this.props.saveToLocal()
     }
     
     flipTempCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'tempCompleted')
-        // console.log(this.props.mapCompletion)
-        // this.props.saveToLocal()
     }
 
     colorTier = (tier, i) => {
-        // console.log(tier)
         let color = 'white'
         if (tier >= 11) {
             color = 'red'
@@ -40,7 +33,6 @@ class SingleMap extends Component {
     }
 
     render() {
-        // console.log(this.props)
         let conditionalDisplay = ''
         if (this.props.filterByCompletion) {
             this.colorImageByTier(this.props.mapData)
