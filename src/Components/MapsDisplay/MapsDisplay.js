@@ -48,7 +48,7 @@ class MapsDisplay extends Component {
 
     createMapComponentsArr = () => {
         let mapDataKeys = Object.keys(mapData);
-        let mapItems = mapDataKeys.filter(this.filterMaps).map((k, key) =>
+        let mapItems = mapDataKeys.map((k, key) =>
             < SingleMap
                 key={key}
                 k={key}
@@ -57,7 +57,7 @@ class MapsDisplay extends Component {
                 changeMapCompletion={this.changeMapCompletion}
                 mapCompletion={this.state.mapCompletion}
             />
-        )
+        ).filter(this.filterMaps)
         return mapItems
     }
     regionsCheckboxes = () => {
@@ -96,7 +96,7 @@ class MapsDisplay extends Component {
         }).filter(item => item)
     }
 
-    filterMaps = (mapKey) => {
+    filterMaps = (item, mapKey) => {
         const localRegion = mapData[mapKey].region
         const isFiltered = this.filteredRegions().includes(localRegion)
         return isFiltered

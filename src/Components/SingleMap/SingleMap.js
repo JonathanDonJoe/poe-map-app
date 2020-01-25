@@ -7,11 +7,11 @@ class SingleMap extends Component {
     flipCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'completed')
     }
-    
+
     flipAwakened = (e) => {
         this.props.changeMapCompletion(this.props.k, 'awakened')
     }
-    
+
     flipTempCompleted = (e) => {
         this.props.changeMapCompletion(this.props.k, 'tempCompleted')
     }
@@ -92,8 +92,9 @@ class SingleMap extends Component {
 
             if ((!this.props.filterByCompletion[0] || this.props.mapCompletion[this.props.k].completed) &&
                 (!this.props.filterByCompletion[1] || this.props.mapCompletion[this.props.k].awakened) &&
-                (!this.props.filterByCompletion[2] || this.props.mapCompletion[this.props.k].tempCompleted))
+                (!this.props.filterByCompletion[2] || this.props.mapCompletion[this.props.k].tempCompleted)) {
                 conditionalDisplay = mapRow
+            }
         }
         return (
             conditionalDisplay
