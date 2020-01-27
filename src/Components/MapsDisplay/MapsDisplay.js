@@ -38,6 +38,26 @@ class MapsDisplay extends Component {
         }, this.saveToLocal)
     }
 
+    completionCount = () => {
+        let completion = {
+            completed: 0,
+            awakened: 0,
+            tempCompleted: 0
+        }
+        Object.keys(this.state.mapCompletion).forEach(mapKey => {
+            if (this.state.mapCompletion[mapKey].completed) {
+                completion.completed += 1
+            }
+            if (this.state.mapCompletion[mapKey].awakened) {
+                completion.awakened += 1
+            }
+            if (this.state.mapCompletion[mapKey].tempCompleted) {
+                completion.tempCompleted += 1
+            }
+        })
+        return completion
+    }
+
     changeMapCompletion = (mapId, completionKey) => {
         let newState = Object.assign({}, this.state.mapCompletion)
         newState[mapId][completionKey] = newState[mapId][completionKey] ? false : true
@@ -113,6 +133,7 @@ class MapsDisplay extends Component {
                     < CompletionCheckboxes
                         toggleCompletionFilter={this.toggleCompletionFilter}
                         filterByCompletion={this.state.filterByCompletion}
+                        completionCount={this.completionCount()}
                     />
                     {this.regionsCheckboxes()}
                 </div>
