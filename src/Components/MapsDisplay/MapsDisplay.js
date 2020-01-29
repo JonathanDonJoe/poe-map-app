@@ -134,6 +134,7 @@ class MapsDisplay extends Component {
                         toggleCompletionFilter={this.toggleCompletionFilter}
                         filterByCompletion={this.state.filterByCompletion}
                         completionCount={this.completionCount()}
+                        mapCount={Object.keys(mapData).length}
                     />
                     {this.regionsCheckboxes()}
                 </div>
