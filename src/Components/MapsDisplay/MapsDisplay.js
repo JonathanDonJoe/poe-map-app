@@ -127,7 +127,7 @@ class MapsDisplay extends Component {
     render() {
         return (
             <div className='container'>
-                <h1>Path of Exile Map Tracker</h1>
+                <h1 className='app-title'>Path of Exile Map Tracker</h1>
                 <div className='filter-container'>
                     <button className='reset-button' onClick={this.resetMapCompletion}>Reset</button>
                     < CompletionCheckboxes
