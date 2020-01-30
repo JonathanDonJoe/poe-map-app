@@ -30,7 +30,11 @@ class SingleMap extends Component {
     }
 
     colorImageByTier = () => {
-        return this.props.mapData.image_url.slice(0, this.props.mapData.image_url.length - 2) + this.props.mapData.tiers[0]
+        if (this.props.mapData.image_url === '') {
+            return "//:0"
+        } else {
+            return this.props.mapData.image_url.slice(0, this.props.mapData.image_url.length - 2) + this.props.mapData.tiers[0]
+        }
     }
 
     render() {
