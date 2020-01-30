@@ -9,6 +9,7 @@ class SingleMap extends Component {
     }
 
     flipAwakened = (e) => {
+        this.props.changeMapCompletion(this.props.k, 'completed')
         this.props.changeMapCompletion(this.props.k, 'awakened')
     }
 

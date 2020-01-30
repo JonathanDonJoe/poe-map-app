@@ -1,6 +1,6 @@
 # Path of Exile Map Tracker
 
-##### Updated for Path 3.9 Metamorph
+##### Updated for Patch 3.9 Metamorph
 
 Contents
 ---
