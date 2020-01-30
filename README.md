@@ -29,6 +29,6 @@ Authors
 
 Screenshots
 ---
-![PoEMaps1](https://imgur.com/Oe125us)
-![PoEMaps2](https://imgur.com/nFTLuBB)
-![PoEMaps3](https://imgur.com/WUAOH5L)
+![PoEMaps1](https://i.imgur.com/Oe125us.png)
+![PoEMaps2](https://i.imgur.com/nFTLuBB.png)
+![PoEMaps3](https://i.imgur.com/WUAOH5L.png)
