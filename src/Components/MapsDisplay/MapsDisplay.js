@@ -60,7 +60,13 @@ class MapsDisplay extends Component {
 
     changeMapCompletion = (mapId, completionKey) => {
         let newState = Object.assign({}, this.state.mapCompletion)
-        newState[mapId][completionKey] = newState[mapId][completionKey] ? false : true
+        if (completionKey === 'awakened') {
+            newState[mapId].awakened = newState[mapId].awakened ? false : true;
+            newState[mapId].completed = true;
+            console.log(newState[mapId].completed);
+        } else {
+            newState[mapId][completionKey] = newState[mapId][completionKey] ? false : true
+        }
         this.setState({
             mapCompletion: newState
         }, this.saveToLocal)
