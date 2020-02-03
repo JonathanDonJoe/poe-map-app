@@ -62,8 +62,9 @@ class MapsDisplay extends Component {
         let newState = Object.assign({}, this.state.mapCompletion);
         if (completionKey === 'completed') {
             if (newState[mapId].completed) {
-                newState[mapId].awakened = false;
                 newState[mapId].completed = false;
+                newState[mapId].awakened = false;
+                newState[mapId].tempCompleted = false;
             } else {
                 newState[mapId].completed = true;
             }
@@ -71,8 +72,9 @@ class MapsDisplay extends Component {
         } else if (completionKey === 'awakened') {
             newState[mapId].awakened = newState[mapId].awakened ? false : true;
             newState[mapId].completed = true;
-        } else {
-            newState[mapId][completionKey] = newState[mapId][completionKey] ? false : true;
+        } else if (completionKey === 'tempCompleted') {
+            newState[mapId].tempCompleted = newState[mapId].tempCompleted ? false : true;
+            newState[mapId].completed = true;
         }
         this.setState({
             mapCompletion: newState
